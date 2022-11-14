@@ -8,8 +8,8 @@ from fastapi.responses import HTMLResponse
 from Backend.PredictionModel import Model
 
 app = FastAPI()
-app.mount("/Fronted",StaticFiles(directory = "Fronted"), name = "Fronted")
-templates = Jinja2Templates(directory="Fronted")
+app.mount("/Frontend",StaticFiles(directory = "Frontend"), name = "Frontend")
+templates = Jinja2Templates(directory="Frontend")
 
 @app.get("/",response_class=HTMLResponse)
 def read_root(request: Request):
@@ -31,7 +31,7 @@ def make_predictions (texto: string):
    else:
       result = "suicida"
    
-   res = "La frase de considera " + result
+   res = "La frase se considera " + result
    return res
 
 
