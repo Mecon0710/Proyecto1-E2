@@ -7,15 +7,34 @@
     <form style="margin:10px;">
         <div class="form-row">
         <div class="col">
-            <input type="text" class="form-control" id="search-box" placeholder="Texto">
+            <input type="text" class="form-control" id="search-box" placeholder="Texto" />
         </div>
         <br>
         <div class="col">
-            <button type="button" id="button-filterByName" class="btn btn-success">Enviar</button>
+            <button type="button" id="button-filterByName" class="btn btn-success" onclick="Enviar()">Enviar</button>
         </div>
         </div>
     </form>
     <h2>Resultado</h2>
+    <input style = "width: 100%" type="text" id="Resultado" />
+    <script>
+        function Enviar() {
+            const input = document.getElementById("search-box").value
+            fetch('/calcularModelo', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+             body: JSON.stringify({ "data": input })
+            })
+            .then((response) => response.json())
+            .then(response => {
+                document.getElementById("Resultado").value = response.data
+            })
+            .catch(error => console.error(error))
+        }
+    </script>
 
 </body>
 </html>
